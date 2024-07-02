@@ -18,7 +18,7 @@ userRouter.post("/add", async(request, result) =>{
 userRouter.get("/", async function(request, result) {
     try {
         let users = await UserModal.find();
-        result.send({ user: users, msg: "All users" });
+        result.send({ users: users, msg: "All users" });
     } catch (error) {
         console.log(error);
     }
