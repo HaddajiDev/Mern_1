@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useDispatch } from 'react-redux';
 import { deleteUser } from '../redux/UserSlice';
+import EditUser from './EditUser';
 
 
 function UserCard({user, ping, setPing}) {
@@ -21,6 +22,7 @@ function UserCard({user, ping, setPing}) {
           {user?.email}
         </Card.Text>
         <Button variant="danger" onClick={() => handleStuff()}>delete</Button>
+        <EditUser user={user} ping={ping} setPing={setPing} />
       </Card.Body>
     </Card>
   )

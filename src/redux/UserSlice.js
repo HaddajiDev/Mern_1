@@ -28,6 +28,15 @@ export const deleteUser = createAsyncThunk("user/delete", async (id) => {
 	}
 });
 
+export const updateUser = createAsyncThunk("user/edit", async ({id, etided}) => {
+	try {
+		let result = await axios.put(`http://localhost:5000/user/${id}`, etided);
+	    return result;
+	} catch (error) {
+		console.log(error);
+	}
+});
+
 const initialState = {
   userList: null,
   status: null
@@ -40,6 +49,7 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
 	builder
 	
+	//Get all users
 	.addCase(getUser.pending, (state) => {
 		state.status = "pending";
 	})
@@ -51,7 +61,7 @@ export const userSlice = createSlice({
 		state.status = "failed";
 	})
 	
-	
+	//Add user
 	.addCase(addUser.pending, (state) => {
 		state.status = "pending";
 	})
@@ -62,6 +72,7 @@ export const userSlice = createSlice({
 		state.status = "failed";
 	})
 
+	//Delete
 	.addCase(deleteUser.pending, (state) => {
 		state.status = "pending";
 	})
@@ -69,6 +80,17 @@ export const userSlice = createSlice({
 		state.status = "success";		
 	})
 	.addCase(deleteUser.rejected, (state) => {
+		state.status = "failed";
+	})
+
+	//Update
+	.addCase(updateUser.pending, (state) => {
+		state.status = "pending";
+	})
+	.addCase(updateUser.fulfilled, (state, action) => {
+		state.status = "success";		
+	})
+	.addCase(updateUser.rejected, (state) => {
 		state.status = "failed";
 	})
   }
