@@ -12,7 +12,7 @@ const connect = require('./db_connect');
 connect();
 app.use(cors());
 app.use("/user", require("./routes/user"));
-
+app.use("/product", require("./routes/product"));
 
 
 const PORT = process.env.PORT;
